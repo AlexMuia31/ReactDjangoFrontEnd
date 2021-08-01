@@ -1,0 +1,3 @@
+[submodule "blogapi"]
+	path = blogapi
+	url = https://github.com/AlexMuia31/ReactDjangoFrontEnd.git
