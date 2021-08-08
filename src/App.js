@@ -1,31 +1,29 @@
-
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import ButtonAppBar from './components/Header';
-import PostLoading from './components/PostLoading';
 import Posts from './components/Posts';
-import Footer from './components/Footer';
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from 'react-router-dom';
-
+import PostLoadingComponent from './components/PostLoading';
 
 function App() {
+  const PostLoading = PostLoadingComponent(Posts);
+  const [appState, setAppState] = useState({
+    loading: false,
+    posts: null,
+  });
+
+  useEffect(() => {
+    setAppState({ loading: true });
+    const apiUrl = `http://127.0.0.1:8000/api/`;
+    fetch(apiUrl)
+      .then((data) => data.json())
+      .then((posts) => {
+        setAppState({ loading: false, posts: posts });
+      });
+  }, [setAppState]);
   return (
-    <Router>
-      <ButtonAppBar />
-      <div className="App">
-        <Switch>
-          <Route path='/' exact></Route>
-          <Route path='/postloading' exact><PostLoading /></Route>
-          <Route path='/posts' exact><Posts /></Route>
-        </Switch>
-      </div>
-      <Footer />
-    </Router>
+    <div className="App">
+      <h1>Latest Posts</h1>
+      <PostLoading isLoading={appState.loading} posts={appState.posts} />
+    </div>
   );
 }
-
 export default App;

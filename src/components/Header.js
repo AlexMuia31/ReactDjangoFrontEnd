@@ -29,10 +29,10 @@ export default function ButtonAppBar() {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h6" className={classes.title} href="/">
                         ReactDjango
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" href='/posts' >Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
